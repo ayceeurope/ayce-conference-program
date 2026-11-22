@@ -140,7 +140,10 @@ body{padding:18px 12px}
 
   function pageScale(pageObj, targetWidth, targetHeight){
     const base=pageObj.getViewport({scale:1});
-    if(fitMode) return Math.min(targetWidth/base.width,targetHeight/base.height,2.2);
+    if(fitMode){
+      const heightLimit=Number.isFinite(targetHeight)?targetHeight:Infinity;
+      return Math.min(targetWidth/base.width,heightLimit/base.height,2.2);
+    }
     return zoom;
   }
 
